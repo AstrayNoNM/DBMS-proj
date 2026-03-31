@@ -1,1 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <title>Perfume Sales Manager</title>
+    <link rel="icon" href="logo.jpg">
+    <link rel="stylesheet" href="styling.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Playfair:300,regular,500,600,700,800,900,300italic,italic,500italic,600italic,700italic,800italic,900italic"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Logo and Header -->
+        <img src="logo.jpg" alt="Logo" class="logo">
+        <p class="logo-name">Aroma Scentique</p>
+        <h1>Aroma Scentique</h1>
+        <h3>Perfume Sales Manager</h3><br w>
+
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <button onclick="showSection('products')">Products</button>
+            <button onclick="showSection('order')">Order Records</button>
+            <button onclick="showSection('records')">Payment Records</button>
+            <button onclick="showSection('cashier')">Cashier/Register</button>
+        </div>
+
+        <!-- Products Section -->
+        <div id="products" class="section" style="display:none;">
+            <h2>📦Perfumes</h2>
+            <ul id="products-list" class="product-list"></ul>
+        </div>
+
+        <script>
+            function loadProducts() {
+                fetch('fetch_products.php')
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById('products-list').innerHTML = data;
+                    })
+                    .catch(error => console.error('Error fetching products:', error));
+            }
+
+            document.addEventListener('DOMContentLoaded', loadProducts);
+        </script>
+
+        <!-- Cashier Section -->
+        <div id="cashier" class="section" style="display:none;">
+            <h2>Cashier - Customer Purchase</h2>
+            <form id="cashier-form" onsubmit="return false;">
+                <h3>Perfumes:</h3>
+                <div class="perfume-grid">
+                    <label>Eros <input type="checkbox" name="mens" value="Eros"></label>
+                    <label>Aqua De Gio <input type="checkbox" name="mens" value="Aqua De Gio"></label>
+                    <label>Lacoste Red <input type="checkbox" name="mens" value="Lacoste Red"></label>
+                    <label>Lacoste Black <input type="checkbox" name="mens" value="Lacoste Black"></label>
+                    <label>Invictus <input type="checkbox" name="mens" value="Invictus"></label>
+                    <label>Polo Sport <input type="checkbox" name="mens" value="Polo Sport"></label>
+                    <label>Aqua Bvlgari <input type="checkbox" name="mens" value="Aqua Bvlgari"></label>
+                    <label>Bvlgari Extreme <input type="checkbox" name="mens" value="Bvlgari Extreme"></label>
+                    <label>CK One <input type="checkbox" name="mens" value="CK One"></label>
+                    <label>Vanilla Lace <input type="checkbox" name="womens" value="Vanilla Lace"></label>
+                    <label>Bombshell <input type="checkbox" name="womens" value="Bombshell"></label>
+                    <label>Ms. Dior <input type="checkbox" name="womens" value="Ms. Dior"></label>
+                    <label>Pure Seduction <input type="checkbox" name="womens" value="Pure Seduction"></label>
+                    <label>Bright Crystal <input type="checkbox" name="womens" value="Bright Crystal"></label>
+                    <label>Incanto Shine <input type="checkbox" name="womens" value="Incanto Shine"></label>
+                    <label>Cucumber Melon <input type="checkbox" name="womens" value="Cucumber Melon"></label>
+                    <label>Rush GE <input type="checkbox" name="womens" value="Rush GE"></label>
+                    <label>Sweet Candy <input type="checkbox" name="womens" value="Sweet Candy"></label>
+                    <label>Meow <input type="checkbox" name="womens" value="Meow"></label>
+                    <label>YSL Libre <input type="checkbox" name="womens" value="YSL Libre"></label>
+                    <label>Cloud <input type="checkbox" name="womens" value="Cloud"></label>
+                    <label>Black Opium <input type="checkbox" name="womens" value="Black Opium"></label>
+                    <label>Bacarrat Rouge <input type="checkbox" name="womens" value="Bacarrat Rouge"></label>
+                </div>
+
+                <label for="qty"><strong>Quantity:</strong></label>
+                <input type="number" id="qty" min="1" required><br><br>
+                <small>Note: Select at least one perfume and enter a valid quantity.</small><br><br>
+
+                <button type="button" class="cart-btn" onclick="addToCart()">🛒 Add to Cart</button>
+            </form>
+
+            <div id="cart-container" style="display:none;">
+                <h2 class="cart-head">Cart</h2>
+                <form action="logic.php" method="post" id="finalForm">
+                    <ul id="cart-list"></ul>
+                    <input type="hidden" name="cartData" id="cartData">
+                    <button type="submit" class="btn">Print Receipt</button><br><br>
+                </form>
+                <button class="clr-btn" onclick="clearCart()">Clear Cart</button>
+            </div>
+        </div>
+
+        <!-- Order Records Section -->
+        <div id="order" class="section" style="display:none;">
+            <h2>👁‍🗨 Order Records</h2>
+            <div id="date-filter">
+                <label for="start-date"><strong>Start Date:</strong></label>
+                <input type="date" id="start-date" name="start-date" placeholder="YYYY-MM-DD" required>
+                <label for="end-date"><strong>End Date:</strong></label>
+                <input type="date" id="end-date" name="end-date" placeholder="YYYY-MM-DD" required>
+                <button type="button" class="filter-btn" onclick="filterOrderRecords()">🗓️ Filter</button>
+                <br><br>
+            </div>
+            <table id="order-records-table" border="1"
+                style="width:100%; text-align:left; margin-top:20px; display:none;">
+                <caption class="cap-order">Order Records</caption>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Items Bought</th>
+                        <th>Total Price</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody id="order-records-body"></tbody>
+            </table>
+        </div>
+
+        <!-- Payment Records Section -->
+        <div id="records" class="section" style="display:none;">
+            <h2 class="payment-head">✔️ Payment Status</h2>
+            <form id="payment-records-form" onsubmit="addPaymentRecord(event)">
+                <label for="costumer-name"><strong>Costumer Name: </strong></label>
+                <input type="text" id="costumer-name" name="costumer-name" required style="width:30%;"><br><br>
+                <label for="payment-status"><strong>Payment Status: </strong></label>
+                <select id="payment-status" name="payment-status" required style="width:10%;">
+                    <option value="Paid">Paid</option>
+                    <option value="Unpaid">Unpaid</option>
+                </select>
+                <label for="balance"><strong>Balance: </strong></label>
+                <input type="number" id="balance" name="balance" step="0.01" style="width:15%;" required>
+                <label for="date"><strong>🕘 Date: </strong></label>
+                <input type="date" id="date" name="date" style="width:10%;"><br><br>
+                <button type="submit" class="add-record">📝 Add Record</button>
+            </form>
+
+            <table id="payment-records-table" border="1"
+                style="width:100%; text-align:left; margin-top:20px; display:none;">
+                <caption class="cap-payment">Payment Records</caption>
+                <thead>
+                    <tr>
+                        <th>Costumer Name</th>
+                        <th>Payment Status</th>
+                        <th>Balance</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody id="records-body"></tbody>
+            </table>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        function loadOrderRecords() {
+            fetch('fetch_orders.php')
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.getElementById('order-records-body');
+                    tbody.innerHTML = '';
+                    data.forEach(order => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                        <td>${order.order_id}</td>
+                        <td>${order.items_bought}</td>
+                        <td>₱${parseFloat(order.total_price).toFixed(2)}</td>
+                        <td>${order.date}</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                    document.getElementById('order-records-table').style.display = data.length ? 'table' : 'none';
+                });
+        }
+
+        document.querySelector('button[onclick="showSection(\'order\')"]').addEventListener('click', loadOrderRecords);
+    </script>
+</body>
+
+</html>
