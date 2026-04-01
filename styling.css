@@ -1,1 +1,333 @@
+/* General Styles */
+body {
+  font-family: "Poppins", sans-serif;
+  background-image: url("FinalBackground.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #fff;
+  text-align: center;
+  padding: 30px;
+  backdrop-filter: blur(10px);
+  position: relative;
+  min-height: 100vh;
+}
 
+h1,
+h2,
+h3 {
+  color: #deec0e;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+  text-align: left;
+  margin-left: 20px;
+}
+
+ul li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  margin: 10px 0;
+  padding: 5px 10px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+input,
+select {
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  width: 250px;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  backdrop-filter: blur(3px);
+}
+
+select option {
+  background-color: #333;
+  color: rgb(255, 255, 255);
+}
+
+/* Container Styles */
+.container {
+  position: relative;
+  background: rgba(7, 7, 0, 0.479);
+  border-radius: 20px;
+  padding: 40px;
+  max-width: auto;
+}
+
+.logo {
+  position: absolute;
+  top: 30px;
+  left: 70px;
+  width: 100px;
+  height: auto;
+  border-radius: 100px;
+}
+
+.logo-name {
+  position: absolute;
+  top: 120px;
+  left: 50px;
+  font-size: 20px;
+  color: #ffffffa9;
+  font-weight: bold;
+  font-family: "Playfair", serif;
+  text-align: center;
+}
+
+/* Navigation Buttons */
+.nav-buttons button {
+  padding: 12px 24px;
+  margin: 40px;
+  background: none;
+  color: #ffffff;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-size: 24px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.nav-buttons button:hover {
+  border-bottom: 2px solid #ffc107;
+  color: #ffc107;
+  transform: scale(1.1);
+}
+
+/* Section Styles */
+.section {
+  margin-top: 25px;
+  opacity: 0;
+  animation: fadeIn 2s forwards;
+}
+
+.section.fade {
+  opacity: 1;
+}
+
+/* Buttons */
+button.btn,
+button.cart-btn,
+button.clr-btn,
+button.add-record,
+button.filter-btn {
+  background: #333;
+  border-radius: 21px;
+  color: #ffc107;
+  font-size: 18px;
+  padding: 12px 24px;
+  margin: 0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+button.btn:hover,
+button.cart-btn:hover,
+button.clr-btn:hover,
+button.add-record:hover,
+button.filter-btn:hover {
+  background: #ffc107;
+  color: #333;
+  border-color: #e0a800;
+  scale: 1.05;
+}
+
+button.remove-btn {
+  background: #333;
+  border-radius: 7px;
+  color: white;
+  padding: 5px 10px;
+}
+
+button.remove-btn:hover {
+  background: #ffc107;
+  color: #333;
+  font-weight: bold;
+  border-color: #e0a800;
+}
+
+/* Perfume Grid */
+.perfume-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+.perfume-grid label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px 18px;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+.perfume-grid label:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.perfume-grid input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #cee40a;
+  border-radius: 4px;
+  background-color: transparent;
+  cursor: pointer;
+  position: relative;
+  margin-left: 12px;
+}
+
+.perfume-grid input[type="checkbox"]:checked::before {
+  content: "✔";
+  position: absolute;
+  top: 0;
+  left: 7px;
+  font-size: 14px;
+  color: #5dfd00;
+}
+
+/* Product List */
+.product-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.product-list li {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  margin: 10px 0;
+  padding: 5px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  width: 100%;
+  gap: 0;
+}
+
+.product-list .name {
+  flex: 2;
+  font-weight: bold;
+  text-align: left;
+}
+
+.product-list .price {
+  flex: 1;
+  text-align: center;
+  color: #ffc107;
+  white-space: nowrap;
+}
+
+.stock input[type="number"] {
+  width: 60px;
+  padding: 5px;
+  font-size: 16px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+/* Forms */
+textarea.ordered-items,
+#order-form input[type="text"],
+#order-form input[type="number"] {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  width: 50%;
+}
+
+#order-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  margin-right: 10px;
+  font-weight: bold;
+  width: 150px;
+  text-align: right;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+}
+
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+table th {
+  background-color: #333;
+  color: white;
+  text-align: left;
+}
+
+#order-records-table th,
+#order-records-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+#order-records-table th {
+  background-color: #333;
+  color: white;
+}
+
+/* Captions */
+.cap-payment,
+.cap-order {
+  color: #ffc107;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
