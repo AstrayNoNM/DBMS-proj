@@ -1,2 +1,1 @@
-# My-progress
-All of my progress are here
+# DBMS project
